@@ -171,7 +171,7 @@ if DarkRP then
 		Name = "Axe",
 		Description = "Requires 1 wood and 2 iron.",
 		Category = "Tools",
-		AllowTeam=",Gun Dealer,Gatherer,",
+		AllowTeam=",Gatherer,Woodcutter,",
 		Materials = {
 			wood = 1,
 			iron = 2
@@ -187,6 +187,7 @@ if DarkRP then
 		Name = "Pickaxe",
 		Description = "Requires 1 wood and 2 iron.",
 		Category = "Tools",
+		AllowTeam=",Gatherer,",
 		Materials = {
 			wood = 1,
 			iron = 2
@@ -230,6 +231,7 @@ if DarkRP then
 		Name = "Gear",
 		Description = "Requires 2 iron.",
 		Category = "Components",
+		AllowTeam=",Engineer,Mechanic,",
 		Materials = {
 			iron = 2
 		},
