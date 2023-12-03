@@ -52,7 +52,7 @@ local function StartCrafting( len, ply )
 
 	if CraftingTable[ent].AllowTeam ~= nil then
 		local plyTeam = ","..team.GetName(ply:Team())..","
-		if not string.find(v.AllowTeam, plyTeam) then return end
+		if not string.find(CraftingTable[ent].AllowTeam, plyTeam) then return end
 	end
 
 	local CraftMaterials = CraftingTable[ent].Materials
@@ -115,7 +115,7 @@ local function StartAutomate( len, ply )
 	
 	if CraftingTable[item].AllowTeam ~= nil then
 		local plyTeam = ","..team.GetName(ply:Team())..","
-		if not string.find(v.AllowTeam, plyTeam) then return end
+		if not string.find(CraftingTable[ent].AllowTeam, plyTeam) then return end
 	end
 
 	ent:SetNWBool( "CraftAutomate"..item, true )
