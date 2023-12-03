@@ -50,6 +50,8 @@ local function StartCrafting( len, ply )
 	local ent = net.ReadString()
 	local entname = net.ReadString()
 
+	if CraftingTable[ent].AllowType ~= nil and not string.find(CraftingTable[ent].AllowType, ","..self:GetTableType()..",") then return end
+
 	if CraftingTable[ent].AllowTeam ~= nil then
 		local plyTeam = ","..team.GetName(ply:Team())..","
 		if not string.find(CraftingTable[ent].AllowTeam, plyTeam) then return end
@@ -113,6 +115,8 @@ local function StartAutomate( len, ply )
 	local itemname = net.ReadString()
 	local timername = "CraftAutomate"..ent:EntIndex()..item
 	
+	if CraftingTable[item].AllowType ~= nil and not string.find(CraftingTable[item].AllowType, ","..ent:GetTableType()..",") then return end
+
 	if CraftingTable[item].AllowTeam ~= nil then
 		local plyTeam = ","..team.GetName(ply:Team())..","
 		if not string.find(CraftingTable[item].AllowTeam, plyTeam) then return end
