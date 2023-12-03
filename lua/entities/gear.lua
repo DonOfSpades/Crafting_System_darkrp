@@ -1,7 +1,7 @@
 AddCSLuaFile()
 
 ENT.Type = "anim"
-ENT.PrintName = "Iron (Crafting Ingredient)"
+ENT.PrintName = "Gear (Crafting Ingredient)"
 ENT.Author = "Lambda Gaming"
 ENT.Spawnable = true
 ENT.AdminOnly = true
@@ -18,7 +18,7 @@ function ENT:SpawnFunction( ply, tr, name )
 end
 
 function ENT:Initialize()
-    self:SetModel( "models/mechanics/solid_steel/plank_4.mdl" )
+    self:SetModel( "models/Mechanics/gears/gear12x12_small.mdl" )
 	self:SetMoveType( MOVETYPE_VPHYSICS )
 	self:SetSolid( SOLID_VPHYSICS )
 	if SERVER then
