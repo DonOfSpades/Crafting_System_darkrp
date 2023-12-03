@@ -85,14 +85,16 @@ CRAFT_CONFIG_BUTTON_TEXT_COLOR = color_white
 
 --List of models the rocks can have
 CRAFT_CONFIG_ROCK_MODELS = {
-	"models/props_debris/barricade_short01a.mdl",
-	"models/props_debris/barricade_short02a.mdl",
-	"models/props_debris/barricade_tall01a.mdl"
+	"models/cliffs/rocks_large01.mdl",
+	"models/cliffs/rocks_large02.mdl",
+	"models/cliffs/rocks_large03.mdl",
+	"models/cliffs/rocks_medium01.mdl"
 }
 
 --List of entities that can be dropped from mining a rock
 CRAFT_CONFIG_ROCK_INGREDIENTS = {
-	{ "iron", 100 } --First entry is the entity name, second entry is the chance it has of spawning from 1 to 100
+	{ "iron", 50 }, --First entry is the entity name, second entry is the chance it has of spawning from 1 to 100
+	{ "copper", 50 }
 }
 
 --List of models the trees can have
@@ -108,18 +110,22 @@ CRAFT_CONFIG_TREE_INGREDIENTS = {
 
 --List of allowed weapons to be used to mine trees
 CRAFT_CONFIG_MINE_WHITELIST_TREE = {
-	["weapon_crowbar"] = true
+	["weapon_crowbar"] = true,
+	["weapon_melee_axe"] = true
 }
 
 --Same as above but for rocks
 CRAFT_CONFIG_MINE_WHITELIST_ROCK = {
-	["weapon_crowbar"] = true
+	["weapon_crowbar"] = true,
+	["weapon_melee_pickaxe"] = true
 }
 
 --Specify weapons to deal specific damage to rocks and trees. Any weapons listed here must be in one of the whitelists to work.
 --Any weapons not listed here but are in the whitelist will assume their default damage values
 CRAFT_CONFIG_MINE_DAMAGE_OVERRIDE = {
-	["weapon_crowbar"] = 5
+	["weapon_crowbar"] = 5,
+	["weapon_melee_axe"] = 10,
+	["weapon_melee_pickaxe"] = 10
 }
 
 

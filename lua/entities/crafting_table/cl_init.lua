@@ -177,7 +177,7 @@ DrawItems = function( ent ) --Panel that draws the list of materials that are on
 	hook.Run( "Craft_OnIngredientsOpen", ent )
 end
 
-DrawRecipes = function( ent ) --Panel that draws the list of recipes
+DrawRecipes = function( ent, ply ) --Panel that draws the list of recipes
 	local ply = LocalPlayer()
 	local mainframe = vgui.Create( "DFrame" )
 	mainframe:SetTitle( "Choose an item to craft:" )
@@ -223,6 +223,11 @@ DrawRecipes = function( ent ) --Panel that draws the list of recipes
 		end
 		categorybutton.NumEntries = 0
 		for k,v in pairs( CraftingTable ) do --Looks over all recipes in the main CraftingTable table
+			if v.AllowTeam ~= nil then
+				local plyTeam = ","..team.GetName(ply:Team())..","
+				if not string.find(v.AllowTeam, plyTeam) then continue end
+			end
+
 			if !v.Category and !table.HasValue( nocategory, v ) then
 				table.insert( nocategory, v )
 				continue
@@ -282,7 +287,7 @@ DrawRecipes = function( ent ) --Panel that draws the list of recipes
 	hook.Run( "Craft_OnRecipesOpen", ent, ply )
 end
 
-DrawMainMenu = function( ent ) --Panel that draws the main menu
+DrawMainMenu = function( ent, ply ) --Panel that draws the main menu
 	local mainframe = vgui.Create( "DFrame" )
 	mainframe:SetTitle( "Crafting Table - Main Menu" )
 	mainframe:SetSize( 300, 150 )
@@ -301,7 +306,7 @@ DrawMainMenu = function( ent ) --Panel that draws the main menu
 		draw.RoundedBox( 10, 0, 0, w, h, CRAFT_CONFIG_BUTTON_COLOR )
 	end
 	recipesbutton.DoClick = function() --Button to open the recipes panel
-		DrawRecipes( ent )
+		DrawRecipes( ent, ply )
 		mainframe:Close()
 		surface.PlaySound( CRAFT_CONFIG_UI_SOUND or GetConVar( "Craft_Config_UI_Sound" ):GetString() )
     end
@@ -327,7 +332,7 @@ net.Receive( "CraftingTableMenu", function( len ) --Receiving the net message to
 	local ply = net.ReadEntity()
 	local trace = ply:GetEyeTrace().Entity
 	if trace != ent then return end
-	DrawMainMenu( ent )
+	DrawMainMenu( ent, ply )
 end )
 
 net.Receive( "CraftMessage", function( len, ply ) --Have to network the entname into here since the client can't see it serverside

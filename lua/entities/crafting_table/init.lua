@@ -49,6 +49,12 @@ local function StartCrafting( len, ply )
 	local self = net.ReadEntity()
 	local ent = net.ReadString()
 	local entname = net.ReadString()
+
+	if CraftingTable[ent].AllowTeam ~= nil then
+		local plyTeam = ","..team.GetName(ply:Team())..","
+		if not string.find(v.AllowTeam, plyTeam) then return end
+	end
+
 	local CraftMaterials = CraftingTable[ent].Materials
 	local SpawnItem = CraftingTable[ent].SpawnFunction
 	local SpawnCheck = CraftingTable[ent].SpawnCheck
@@ -106,6 +112,12 @@ local function StartAutomate( len, ply )
 	local item = net.ReadString()
 	local itemname = net.ReadString()
 	local timername = "CraftAutomate"..ent:EntIndex()..item
+	
+	if CraftingTable[item].AllowTeam ~= nil then
+		local plyTeam = ","..team.GetName(ply:Team())..","
+		if not string.find(v.AllowTeam, plyTeam) then return end
+	end
+
 	ent:SetNWBool( "CraftAutomate"..item, true )
 	timer.Create( timername, CRAFT_CONFIG_AUTOMATION_TIME or GetConVar( "Craft_Config_Automation_Time" ):GetInt(), 0, function()
 		local CraftMaterials = CraftingTable[item].Materials
