@@ -3,6 +3,7 @@ ENT.PrintName = "Crafting Table"
 ENT.Author = "Lambda Gaming"
 ENT.Spawnable = true
 ENT.Category = "Crafting Table"
+ENT.Base = "base_gmodentity"
 
 --Convars that allow you to change values on your singleplayer game or listen server while it's running, don't touch these unless you know what you're doing
 CreateConVar( "Craft_Config_MaxHealth", 100, { FCVAR_ARCHIVE }, "The max health of the crafting table." )
@@ -109,6 +110,11 @@ CraftingCategory[8] = {
 	Color = COLOR_DEFAULT
 }
 
+CraftingCategory[9] = {
+	Name = "Crafting Tables",
+	Color = COLOR_DEFAULT
+}
+
 --Template ingredient category
 --[[
 	IngredientCategory[1] = { --Be sure to change the number, the lower the number, the higher up in the list it is
@@ -171,7 +177,8 @@ if DarkRP then
 		Name = "Axe",
 		Description = "Requires 1 wood and 2 iron.",
 		Category = "Tools",
-		AllowTeam=",Gun Dealer,Gatherer,",
+		AllowTeam = ",Gun Dealer,Gatherer,",
+		AllowType = ",2,",
 		Materials = {
 			wood = 1,
 			iron = 2
@@ -187,6 +194,7 @@ if DarkRP then
 		Name = "Pickaxe",
 		Description = "Requires 1 wood and 2 iron.",
 		Category = "Tools",
+		AllowType = ",2,",
 		Materials = {
 			wood = 1,
 			iron = 2
@@ -202,6 +210,7 @@ if DarkRP then
 		Name = "Lockpick",
 		Description = "Requires 1 iron.",
 		Category = "Tools",
+		AllowType = ",3,",
 		Materials = {
 			iron = 1
 		},
@@ -216,6 +225,7 @@ if DarkRP then
 		Name = "Crowbar",
 		Description = "Requires 3 iron.",
 		Category = "Tools",
+		AllowType = ",2,",
 		Materials = {
 			iron = 3
 		},
@@ -225,6 +235,27 @@ if DarkRP then
 			e:Spawn()
 		end
 	}
+
+	CraftingTable["weapon_table"] = {
+		Name = "Weapon Crafting Table",
+		Description = "Requires 1 iron.",
+		Category = "Crafting Tables",
+		Materials = {
+			iron = 1
+		},
+		SpawnFunction = function( ply, self )
+			local e = ents.Create( "crafting_table" )
+			--e:SetModel("Model")
+			e:SetPos( self:GetPos() + Vector( 0, 0, 10 ) )
+			e:SetTableType(2)
+			e:Spawn()
+			undo.Create("prop")
+			undo.AddEntity(e)
+			undo.SetPlayer(ply)
+			undo.Finish()
+		end
+	}
+
 	-- Components
 	CraftingTable["gear"] = {
 		Name = "Gear",
@@ -240,4 +271,8 @@ if DarkRP then
 		end
 	}
 	
+end
+
+function ENT:SetupDataTables()
+	self:NetworkVar( "Int", 1, "TableType" ) --Access and write to using ent:GetTableType() and ent:SetTableType()
 end

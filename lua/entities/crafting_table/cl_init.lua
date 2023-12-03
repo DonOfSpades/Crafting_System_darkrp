@@ -223,6 +223,8 @@ DrawRecipes = function( ent, ply ) --Panel that draws the list of recipes
 		end
 		categorybutton.NumEntries = 0
 		for k,v in pairs( CraftingTable ) do --Looks over all recipes in the main CraftingTable table
+			if v.AllowType ~= nil and not string.find(v.AllowType, ","..ent:GetTableType()..",") then continue end
+
 			if v.AllowTeam ~= nil then
 				local plyTeam = ","..team.GetName(ply:Team())..","
 				if not string.find(v.AllowTeam, plyTeam) then continue end
