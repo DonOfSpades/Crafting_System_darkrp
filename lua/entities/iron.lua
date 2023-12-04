@@ -18,7 +18,7 @@ function ENT:SpawnFunction( ply, tr, name )
 end
 
 function ENT:Initialize()
-    self:SetModel( "models/mechanics/solid_steel/plank_4.mdl" )
+    self:SetModel( "models/mosi/fallout4/props/junk/components/steel.mdl" )
 	self:SetMoveType( MOVETYPE_VPHYSICS )
 	self:SetSolid( SOLID_VPHYSICS )
 	if SERVER then

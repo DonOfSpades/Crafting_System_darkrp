@@ -18,7 +18,7 @@ function ENT:SpawnFunction( ply, tr, name )
 end
 
 function ENT:Initialize()
-    self:SetModel( "models/props_phx/construct/wood/wood_boardx1.mdl" )
+    self:SetModel( "models/mosi/fallout4/props/junk/components/wood.mdl" )
 	self:SetMoveType( MOVETYPE_VPHYSICS )
 	self:SetSolid( SOLID_VPHYSICS )
 	if SERVER then

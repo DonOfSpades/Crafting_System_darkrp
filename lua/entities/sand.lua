@@ -1,7 +1,7 @@
 AddCSLuaFile()
 
 ENT.Type = "anim"
-ENT.PrintName = "Copper (Crafting Ingredient)"
+ENT.PrintName = "Sand (Crafting Ingredient)"
 ENT.Author = "Lambda Gaming"
 ENT.Spawnable = true
 ENT.AdminOnly = true
@@ -18,7 +18,7 @@ function ENT:SpawnFunction( ply, tr, name )
 end
 
 function ENT:Initialize()
-    self:SetModel( "models/mosi/fallout4/props/junk/components/copper.mdl" )
+    self:SetModel( "models/props_clutter/coin_bag_large.mdl" )
 	self:SetMoveType( MOVETYPE_VPHYSICS )
 	self:SetSolid( SOLID_VPHYSICS )
 	if SERVER then

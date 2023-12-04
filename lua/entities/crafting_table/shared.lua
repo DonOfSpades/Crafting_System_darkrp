@@ -46,6 +46,21 @@ CraftingIngredient["wood"] = {
 	Category = "Base Ingredients"
 }
 
+CraftingIngredient["rubber"] = {
+	Name = "Rubber",
+	Category = "Base Ingredients"
+}
+
+CraftingIngredient["stone"] = {
+	Name = "Stone",
+	Category = "Base Ingredients"
+}
+
+CraftingIngredient["sand"] = {
+	Name = "Sand",
+	Category = "Base Ingredients"
+}
+
 CraftingIngredient["iron"] = {
 	Name = "Iron",
 	Category = "Base Ingredients"
@@ -60,6 +75,12 @@ CraftingIngredient["gear"] = {
 	Name = "Gear",
 	Category = "Components"
 }
+
+CraftingIngredient["cable"] = {
+	Name = "Cable",
+	Category = "Components"
+}
+
 
 --Template recipe category
 --[[
@@ -178,7 +199,6 @@ if DarkRP then
 		Description = "Requires 1 wood and 2 iron.",
 		Category = "Tools",
 		AllowTeam = ",Gatherer,Woodcutter,",
-		AllowType = ",2,",
 		Materials = {
 			wood = 1,
 			iron = 2
@@ -194,8 +214,7 @@ if DarkRP then
 		Name = "Pickaxe",
 		Description = "Requires 1 wood and 2 iron.",
 		Category = "Tools",
-		AllowTeam=",Gatherer,",
-		AllowType = ",2,",
+		AllowTeam=",Gatherer,Miner,",
 		Materials = {
 			wood = 1,
 			iron = 2
@@ -211,7 +230,7 @@ if DarkRP then
 		Name = "Lockpick",
 		Description = "Requires 1 iron.",
 		Category = "Tools",
-		AllowType = ",3,",
+		AllowType = ",2,",
 		Materials = {
 			iron = 1
 		},
@@ -239,10 +258,12 @@ if DarkRP then
 
 	CraftingTable["weapon_table"] = {
 		Name = "Weapon Crafting Table",
-		Description = "Requires 1 iron.",
+		Description = "Requires 10 iron and 5 gears.",
 		Category = "Crafting Tables",
+		AllowTeam=",Engineer,Gun Dealer,",
 		Materials = {
-			iron = 1
+			iron = 10,
+			gear = 5
 		},
 		SpawnFunction = function( ply, self )
 			local e = ents.Create( "crafting_table" )
@@ -272,7 +293,22 @@ if DarkRP then
 			e:Spawn()
 		end
 	}
-	
+
+	CraftingTable["cable"] = {
+		Name = "Cable",
+		Description = "Requires 1 copper and 1 rubber.",
+		Category = "Components",
+		AllowTeam=",Engineer,Technician,",
+		Materials = {
+			copper = 1,
+			rubber = 1
+		},
+		SpawnFunction = function( ply, self )
+			local e = ents.Create( "cable" )
+			e:SetPos( self:GetPos() + Vector( 0, 0, -5 ) )
+			e:Spawn()
+		end
+	}	
 end
 
 function ENT:SetupDataTables()
